@@ -49,16 +49,40 @@ What do you think, is it a good assembly?
 ### Step 4. Annotate your assembly
 **Step 4**: Ok so the assembly could be better, but how about we annotate some genes? We will do this using **Prokka**. This is a specialist software specific to bacteria. There are lots of other tools for annotating Eukaryotes and beyond, however, this tool is well-developed for bacteria species.
 
+```
+prokka --outdir assembly_annotation --prefix Ecoli_Japan_1 flye_output/assembly.fasta
+```
+Inside the assembly_annotation directory you will see "Ecoli_Japan_1.gff". This is the most common format for annotations. If you like, you can load this into **igv** to visualise the annotation (Load Genome: Ecoli_Japan_1.fna; Load files:Ecoli_Japan_1.gff). We can analyse the annotations further downstream (See Step 6).
+
+### Step 5. Predicting Drug-resistance
+**Step 5**: Great! We have an assembly and we have annotated it. How are the assemblies useful for downstream analysis? For bacteria specifically, genome assemblies can be input into specialist software to mass screen the contigs (bits of the assembly) for antimicrobial resistance genes, virulence genes or plasmids. **Abricate** is a handy suite of tools that can help us do this by scanning databases of these genes.
+Some resistance genes:
+```
+
+```
+Some virulence genes:
+```
 
 
+```
+Some plasmids:
+```
+
+```
+
+### Step 6. Pan-genome Analysis
 
 
+### Step 7. Mapping and Variant Calling
 
-
-1️⃣ Step: Let's first check the quality of the nanopore fastq data by mapping to an E.coli reference genome using **Minimap2**. Notice the '-ax map-ont' signalling we are using Nanopore data. Minimap2 creates a SAM file, a type of alignment file. We need to convert this to a BAM file to make the alignment compatible with other software. We do this using **samtools**.
+Mapping and variant calling tools are different that illumina. Nanopore fastq data by mapping to an E.coli reference genome using **Minimap2**. Notice the '-ax map-ont' signalling we are using Nanopore data. Minimap2 creates a SAM file, a type of alignment file. We need to convert this to a BAM file to make the alignment compatible with other software. We do this using **samtools**.
 ```
 cd nanopore/bacteria/data
 minimap2 -ax map-ont Ecoli_reference.fasta Ecoli_Japan_1_trim.fastq.gz  | samtools sort -o Ecoli_Japan_1_aln.bam
+```
+For variant calling we tend to use variant callers that have been designed specifically for Nanopore data. This includes Clair3, which can generate outputs that are seemingly compatible with GATK software.
+```
+
 ```
 
 ### Advanced
