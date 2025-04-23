@@ -80,7 +80,7 @@ Take a look at some of the resistance genes and plasmids- why might the blaCTX-M
 
 ### Step 7. Mapping and Variant Calling
 
-Mapping and variant calling tools are different that illumina. Nanopore fastq data by mapping to an E.coli reference genome using **Minimap2**. Notice the '-ax map-ont' signalling we are using Nanopore data. Minimap2 creates a SAM file, a type of alignment file. We need to convert this to a BAM file to make the alignment compatible with other software. We do this using **samtools**.
+Mapping and variant calling tools are different that what is typically used with Illumina data. Nanopore fastq data by mapping to an E.coli reference genome using **Minimap2**. Notice the '-ax map-ont' signalling we are using Nanopore data. Minimap2 creates a SAM file, a type of alignment file. We need to convert this to a BAM file to make the alignment compatible with other software. We do this using **samtools**.
 ```
 cd nanopore/bacteria/data
 minimap2 -ax map-ont Ecoli_reference.fasta Ecoli_Japan_1_trim.fastq.gz  | samtools sort -o Ecoli_Japan_1_aln.bam
