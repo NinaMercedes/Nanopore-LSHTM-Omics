@@ -35,7 +35,7 @@ python ./taxdump/extract_kraken_reads.py --include-children --fastq-output -t 54
 flye --nano-raw "./kraken/Ecoli_Japan_1.kraken_filtered.fq"  --genome-size 4.6m --out-dir flye_output --threads 16 
 ```
 
-### Step 3. Assess Quality of your Assembly
+### Step 3. Assess the Quality of your Assembly
 **Step 3**: Now the assembly is ready we will test its quality using **BUSCO**. BUSCO assesses the quality of genome assemblies by looking at the percentage of conserved genes. 
 ```
 busco -i flye_output/assembly.fasta -l enterobacteriaceae_odb12 -c 16 -m genome -o assembly_QC
