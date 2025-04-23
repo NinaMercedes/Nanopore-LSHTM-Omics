@@ -42,7 +42,7 @@ flye --nano-raw "./kraken/Ecoli_Japan_1.kraken_filtered.fq"  --genome-size 4.6m 
 ### Step 3. Assess Quality of your Assembly
 **Step 3**: Now the assembly is ready we will test its quality using **BUSCO**. BUSCO assesses the quality of genome assemblies by looking at the percentage of conserved genes. 
 ```
-busco -i flye_output/assembly.fasta -l enterobacteriaceae_odb12 -c 16 -m genome  -o assembly_QC
+busco -i flye_output/assembly.fasta -l enterobacteriaceae_odb12 -c 16 -m genome -o assembly_QC
 ```
 What do you think, is it a good assembly?
 
@@ -74,7 +74,10 @@ Take a look at some of the resistance genes and plasmids- why might the blaCTX-M
 
 
 ### Step 6. Pan-genome Analysis
+**Step 6**: With growth in the size of datasets, there is a need to understand key processes such as selection and evolution taking place in bacteria populations. For example, bacteria can transfer genes to one another, otherwise known as 'horizontal gene transfer' which can spread virulence and resistance genes. One way to identify some of these diffrences is to look *core* or *accessory* genes within a population: A Pangenome. **Roary** and **Pirate** can be used to compare our gff annotation files to one another and construct a pangenome. 
+```
 
+```
 
 ### Step 7. Mapping and Variant Calling
 
@@ -83,15 +86,10 @@ Mapping and variant calling tools are different that illumina. Nanopore fastq da
 cd nanopore/bacteria/data
 minimap2 -ax map-ont Ecoli_reference.fasta Ecoli_Japan_1_trim.fastq.gz  | samtools sort -o Ecoli_Japan_1_aln.bam
 ```
-For variant calling we tend to use variant callers that have been designed specifically for Nanopore data. This includes Clair3, which can generate outputs that are seemingly compatible with GATK software.
-```
-
-```
+For variant calling we tend to use variant callers that have been designed specifically for Nanopore data. This includes **Clair3** and **Freebayes**, which can generate outputs that are seemingly compatible with GATK software. These tools can be fairly slow so feel free to trial them in your own time!
 
 ### Advanced
-Now that you have identified the drug-resistance genes for one sample, how about performing the steps on the remaining samples e.g. Ecoli_Japan_2_trim.fastq.gz, what are your results?
-
-
+Now that you have identified the drug-resistance genes for one sample, how about performing the steps 2-5 on the remaining samples e.g. Ecoli_Japan_2_trim.fastq.gz, what are your results?
 
 ### Tips and Tricks
 
