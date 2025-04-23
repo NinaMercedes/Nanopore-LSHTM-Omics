@@ -1,11 +1,6 @@
 # Nanopore-LSHTM-Omics
 Nanopore LSHTM 'Omics Course
-## Manual Installations
-```
-conda create -n nanopore_test
-conda activate nanopore_test
-conda install porechop_abi
-```
+
 ## Identifying drug-resistance from *Escherichia coli* WGS sequenced using Oxford Nanopore reads
 In the data repository you have been provided with seven *Escherichia coli* whole genome sequences that have been sequenced using Oxford Nanopore (MinION). These samples were collected from a long-term health care facility in Japan by a previous study (ENA Project Accession: PRJDB9189). These sequences have already been basecalled, trimmed and we have provided some QC reports. Your task is to analyse the Nanopore fastq data to identify drug-resistance genes. 
 
@@ -14,6 +9,7 @@ As we have done previously, the first step will be to perform QC before going on
 ### Step 1. Quality Control and Contamination
 **Step 1**: Let's first check the quality of the nanopore fastq data by mapping to an E.coli reference genome. To do this we use a 'sequencing_summary.txt' file generated using dorado. We check quality using **PycoQC**:
 ```
+conda activate nanopore
 mkdir pycoqc
 pycoQC –f sequencing_summary.txt –o pycoqc/Ecoli_Japan_1_PycoQC.html
 ```
@@ -73,15 +69,20 @@ Take a look at some of the resistance genes and plasmids- why might the blaCTX-M
 
 
 ### Step 6. Pan-genome Analysis
-**Step 6**: With growth in the size of datasets, there is a need to understand key processes such as selection and evolution taking place in bacteria populations. For example, bacteria can transfer genes to one another, otherwise known as 'horizontal gene transfer' which can spread virulence and resistance genes. One way to identify some of these diffrences is to look *core* or *accessory* genes within a population: A Pangenome. **Roary** and **Pirate** can be used to compare our gff annotation files to one another and construct a pangenome. 
+**Step 6**: With growth in the size of datasets, there is a need to understand key processes such as selection and evolution taking place in bacteria populations. For example, bacteria can transfer genes to one another, otherwise known as 'horizontal gene transfer' which can spread virulence and resistance genes. One way to identify some of these diffrences is to look *core* or *accessory* genes within a population: A Pangenome. **Roary** and **Pirate** can be used to compare our gff annotation files to one another and construct a pangenome. We will use a different conda environment.
 ```
+conda deactivate
+conda activate roary
 
+
+conda deactivate
 ```
 
 ### Step 7. Mapping and Variant Calling
 
 Mapping and variant calling tools are different that what is typically used with Illumina data. Nanopore fastq data by mapping to an E.coli reference genome using **Minimap2**. Notice the '-ax map-ont' signalling we are using Nanopore data. Minimap2 creates a SAM file, a type of alignment file. We need to convert this to a BAM file to make the alignment compatible with other software. We do this using **samtools**.
 ```
+conda activate nanopore
 cd nanopore/bacteria/data
 minimap2 -ax map-ont Ecoli_reference.fasta Ecoli_Japan_1_trim.fastq.gz  | samtools sort -o Ecoli_Japan_1_aln.bam
 ```
