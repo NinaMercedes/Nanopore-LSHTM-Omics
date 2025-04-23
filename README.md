@@ -57,7 +57,7 @@ minimap2 -ax map-ont Ecoli_reference.fasta Ecoli_Japan_1_trim.fastq.gz  | samtoo
 ```
 
 ### Advanced
-Now that you have identified the drug-resistance genes for one sample, how about performing the steps on the remaining samples e.g. Ecoli_Japan_1_trim.fastq.gz, what are your result
+Now that you have identified the drug-resistance genes for one sample, how about performing the steps on the remaining samples e.g. Ecoli_Japan_2_trim.fastq.gz, what are your results?
 
 
 
