@@ -11,7 +11,8 @@ In the data repository you have been provided with seven *Escherichia coli* whol
 
 As we have done previously, the first step will be to perform QC before going onto downstream analysis. To trim the nanopore reads we have used **Porechop** (*ab initio*) to identify any adapter sequences and remove them. This is an important step, especially when performing genome assembly. 
 
-1️⃣ Step1: Let's first check the quality of the nanopore fastq data by mapping to an E.coli reference genome. To do this we use a 'sequencing_summary.txt' file generated using dorado. We check quality using **PycoQC**:
+### Step 1. Quality Control and Contamination
+**Step1**: Let's first check the quality of the nanopore fastq data by mapping to an E.coli reference genome. To do this we use a 'sequencing_summary.txt' file generated using dorado. We check quality using **PycoQC**:
 ```
 mkdir pycoqc
 pycoQC –f sequencing_summary.txt –o pycoqc/Ecoli_Japan_1_PycoQC.html
@@ -25,7 +26,24 @@ rcf -n ./taxdump/ -k Ecoli_Japan_1.koutput.txt -o kraken/Ecoli_Japan_1_kraken.ht
 ```
 What can you determine from the Kraken2 outputs? Is the data clean? There are a few other genera included in the output- do you think they are contaminants (or not)?
 
-Just in case we will filter our fastq files to remove any contaminants. We won't be too stringent with the filtering. To do this we will use **KrakenTools**:
+Just in case we will filter our fastq files to remove any contaminants. We won't be too stringent with the filtering- we will use the taxa id from NCBI for Enterobacteriaceae (543). To do this we will use **KrakenTools**:
+
+```
+python ./taxdump/extract_kraken_reads.py --include-children --fastq-output -t 543 -k "Ecoli_Japan_1.koutput.txt" -r "Ecoli_Japan_1.kreport.txt" -s "Ecoli_Japan_1_trim.fastq.gz" -o "./kraken/Ecoli_Japan_1.kraken_filtered.fq" 
+```
+
+### Step 2. Assembly
+**Step2**: Let's first now perform genome assembly using our high-quality, trimmed and filtered nanopore fastq. There are a few different tools we can use, but for Nanopore data **Flye** performs well. This may take 5 minutes or so to run.
+
+```
+flye --nano-raw "./kraken/Ecoli_Japan_1.kraken_filtered.fq"  --genome-size 4.6m --out-dir flye_output --threads 16 
+
+```
+
+### Step 3. Assess Quality of your Assembly
+
+
+
 
 
 
