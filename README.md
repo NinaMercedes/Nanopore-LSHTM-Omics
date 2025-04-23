@@ -69,14 +69,19 @@ Take a look at some of the resistance genes and plasmids- why might the blaCTX-M
 
 
 ### Step 6. Pan-genome Analysis
-**Step 6**: With growth in the size of datasets, there is a need to understand key processes such as selection and evolution taking place in bacteria populations. For example, bacteria can transfer genes to one another, otherwise known as 'horizontal gene transfer' which can spread virulence and resistance genes. One way to identify some of these diffrences is to look *core* or *accessory* genes within a population: A Pangenome. **Roary** and **Pirate** can be used to compare our gff annotation files to one another and construct a pangenome. We will use a different conda environment.
+**Step 6**: With growth in the size of datasets, there is a need to understand key processes such as selection and evolution taking place in bacteria populations. For example, bacteria can transfer genes to one another, otherwise known as 'horizontal gene transfer' which can spread virulence and resistance genes. One way to identify some of these diffrences is to look *core* or *accessory* genes within a population: A Pangenome. **Roary** and **Pirate** can be used to compare our gff annotation files to one another and construct a pangenome. We will use a different conda environment. This may take a moment or two!
 ```
 conda deactivate
 conda activate roary
-
-
+cd all_gffs
+roary -e --mafft -p 8 *.gff
 conda deactivate
 ```
+Open firefox and load https://jameshadfield.github.io/phandango/#/ to view the roary output files. Drag and drop the "assembly_annotations/accessory_binary_genes.fa.newick" and "assembly_annotations/gene_presence_absence.csv" files into phandango. Note not all the samples were included (some might not have passed QC tests). You should get something that looks like this:
+![image](https://github.com/user-attachments/assets/b7d08789-1eab-45a5-b823-89fe1324d953)
+
+
+What do you think the blue blocks mean?
 
 ### Step 7. Mapping and Variant Calling
 
