@@ -58,17 +58,20 @@ Inside the assembly_annotation directory you will see "Ecoli_Japan_1.gff". This 
 **Step 5**: Great! We have an assembly and we have annotated it. How are the assemblies useful for downstream analysis? For bacteria specifically, genome assemblies can be input into specialist software to mass screen the contigs (bits of the assembly) for antimicrobial resistance genes, virulence genes or plasmids. **Abricate** is a handy suite of tools that can help us do this by scanning databases of these genes.
 Some resistance genes:
 ```
-
+mkdir abricate_results
+abricate --db resfinder --quiet flye_output/assembly.fasta > abricate_results/resistance_results.txt
 ```
 Some virulence genes:
 ```
-
+abricate --db vfdb --quiet flye_output/assembly.fasta > abricate_results/virulence_results.txt
 
 ```
 Some plasmids:
 ```
-
+abricate --db plasmidfinder --quiet flye_output/assembly.fasta > abricate_results/plasmid_results.txt
 ```
+Take a look at some of the resistance genes and plasmids- why might the blaCTX-M-27 gene be of concern?
+
 
 ### Step 6. Pan-genome Analysis
 
