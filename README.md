@@ -85,7 +85,7 @@ What do you think the blue blocks mean?
 
 ### Step 7. Mapping and Variant Calling
 
-The ,apping and variant calling tools for Nanopore are different than those typically used with Illumina data. Nanopore fastq data by mapping to an E.coli reference genome using **Minimap2**. Notice the '-ax map-ont' signalling we are using Nanopore data. Minimap2 creates a SAM file, a type of alignment file. We need to convert this to a BAM file to make the alignment compatible with other software. We do this using **samtools**.
+The mapping and variant calling tools for Nanopore are different than those typically used with Illumina data. Nanopore fastq data by mapping to an E.coli reference genome using **Minimap2**. Notice the '-ax map-ont' signalling we are using Nanopore data. Minimap2 creates a SAM file, a type of alignment file. We need to convert this to a BAM file to make the alignment compatible with other software. We do this using **samtools**.
 ```
 conda activate nanopore
 cd nanopore/bacteria/data
