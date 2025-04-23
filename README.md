@@ -6,7 +6,7 @@ conda create -n nanopore_test
 conda activate nanopore_test
 conda install porechop_abi
 ```
-## Identifying drug-resistance from *Escherichia coli* WGS sequenced using Oxford Nanopore
+## Identifying drug-resistance from *Escherichia coli* WGS sequenced using Oxford Nanopore reads
 In the data repository you have been provided with seven *Escherichia coli* whole genome sequences that have been sequenced using Oxford Nanopore (MinION). These samples were collected from a long-term health care facility in Japan by a previous study (ENA Project Accession: PRJDB9189). These sequences have already been basecalled, trimmed and we have provided some QC reports. Your task is to analyse the Nanopore fastq data to identify drug-resistance genes. 
 
 As we have done previously, the first step will be to perform QC before going onto downstream analysis. To trim the nanopore reads we have used **Porechop** (*ab initio*) to identify any adapter sequences and remove them. This is an important step, especially when performing genome assembly. 
@@ -25,6 +25,7 @@ rcf -n ./taxdump/ -k Ecoli_Japan_1.koutput.txt -o kraken/Ecoli_Japan_1_kraken.ht
 ```
 What can you determine from the Kraken2 outputs? Is the data clean? There are a few other genera included in the output- do you think they are contaminants (or not)?
 
+Just in case we will filter our fastq files to remove any contaminants. We won't be too stringent with the filtering. To do this we will use **KrakenTools**:
 
 
 
