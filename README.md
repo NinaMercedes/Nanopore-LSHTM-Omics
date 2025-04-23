@@ -48,7 +48,6 @@ What do you think, is it a good assembly?
 
 ### Step 4. Annotate your assembly
 **Step 4**: Ok so the assembly could be better, but how about we annotate some genes? We will do this using **Prokka**. This is a specialist software specific to bacteria. There are lots of other tools for annotating Eukaryotes and beyond, however, this tool is well-developed for bacteria species.
-
 ```
 prokka --outdir assembly_annotation --prefix Ecoli_Japan_1 flye_output/assembly.fasta
 ```
