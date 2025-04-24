@@ -29,10 +29,10 @@ python ./taxdump/extract_kraken_reads.py --include-children --fastq-output -t 54
 ```
 
 ### Step 2. Assembly
-**Step 2**: Let's first now perform genome assembly using our high-quality, trimmed and filtered nanopore fastq. There are a few different tools we can use, but for Nanopore data **Flye** performs well. This may take 5 minutes or so to run.
+**Step 2**: Let's first now perform genome assembly using our high-quality, trimmed and filtered nanopore fastq. There are a few different tools we can use, but for Nanopore data **Flye** performs well. This may take 5 minutes or so to run. 
 
 ```
-flye --nano-raw "./kraken/Ecoli_Japan_1.kraken_filtered.fq"  --genome-size 4.6m --out-dir flye_output --threads 16 
+flye --nano-raw "./kraken/Ecoli_Japan_1.kraken_filtered.fq" --read-error 0.03 --genome-size 4.6m --out-dir flye_output --threads 16 
 ```
 
 ### Step 3. Assess the Quality of your Assembly
@@ -94,7 +94,8 @@ minimap2 -ax map-ont Ecoli_reference.fasta Ecoli_Japan_1_trim.fastq.gz  | samtoo
 For variant calling we tend to use variant callers that have been designed specifically for Nanopore data. This includes **Clair3** and **Freebayes**, which can generate outputs that are seemingly compatible with GATK software. These tools can be fairly slow so feel free to trial them in your own time!
 
 ### Advanced
-Now that you have identified the drug-resistance genes for one sample, how about performing the steps 2-5 on the remaining samples e.g. Ecoli_Japan_2_trim.fastq.gz, what are your results?
+1. Now that you have identified the drug-resistance genes for one sample, how about performing the steps 2-5 on the remaining samples e.g. Ecoli_Japan_2_trim.fastq.gz, what are your results?
+2. You can see in step 2 used a read error of **0.03**, if you have time you could change this to **0.05**. How does this affect your BUSCO and QUAST results?
 
 ### Tips and Tricks
 
