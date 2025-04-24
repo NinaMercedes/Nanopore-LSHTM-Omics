@@ -83,7 +83,7 @@ cd all_gffs
 roary -e --mafft -p 8 *.gff
 conda deactivate
 ```
-Open firefox and load https://jameshadfield.github.io/phandango/#/ to view the roary output files. Drag and drop the "assembly_annotations/accessory_binary_genes.fa.newick" and "assembly_annotations/gene_presence_absence.csv" files into phandango. Note not all the samples were included (some might not have passed QC tests). You should get something that looks like this:
+Open firefox and load https://jameshadfield.github.io/phandango/#/ to view the roary output files. Drag and drop the "assembly_annotations/accessory_binary_genes.fa.newick" and "assembly_annotations/gene_presence_absence.csv" files into phandango. You should get something that looks like this:
 ![image](https://github.com/user-attachments/assets/b7d08789-1eab-45a5-b823-89fe1324d953)
 
 
