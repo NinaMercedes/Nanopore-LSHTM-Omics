@@ -7,7 +7,7 @@ In the data repository you have been provided with seven *Escherichia coli* whol
 As we have done previously, the first step will be to perform QC before going onto downstream analysis. 
 
 ### Step 1. Quality Control and Contamination
-**Step 1**: Let's first check the quality of the nanopore fastq data by mapping to an E.coli reference genome. To do this we use a 'sequencing_summary.txt' file generated using dorado. We check quality using **PycoQC**:
+**Step 1**: Let's first check the quality of the nanopore fastq data. To do this we use a 'sequencing_summary.txt' file generated using dorado. We check quality using **PycoQC**:
 ```
 conda activate nanopore
 cd nanopore/data
@@ -90,7 +90,7 @@ Open firefox and load https://jameshadfield.github.io/phandango/#/ to view the r
 
 ### Step 7. Mapping and Variant Calling
 
-The mapping and variant calling tools for Nanopore are different than those typically used with Illumina data. Nanopore fastq data by mapping to an E.coli reference genome using **Minimap2**. Notice the '-ax map-ont' signalling we are using Nanopore data. Minimap2 creates a SAM file, a type of alignment file. We need to convert this to a BAM file to make the alignment compatible with other software. We do this using **samtools**.
+The mapping and variant calling tools for Nanopore are different than those typically used with Illumina data. Nanopore fastq data can be mapped to an E.coli reference genome using **Minimap2**. Notice the '-ax map-ont' signalling we are using Nanopore data. Minimap2 creates a SAM file, a type of alignment file. We need to convert this to a BAM file to make the alignment compatible with other software. We do this using **samtools**.
 ```
 conda activate nanopore
 cd ~/nanopore/data
