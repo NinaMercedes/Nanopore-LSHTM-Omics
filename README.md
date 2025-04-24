@@ -12,7 +12,7 @@ As we have done previously, the first step will be to perform QC before going on
 conda activate nanopore
 cd nanopore/data
 mkdir pycoqc
-pycoQC –f sequencing_summary.txt –o pycoqc/Ecoli_Japan_1_PycoQC.html
+pycoQC -f sequencing_summary.txt -o pycoqc/Ecoli_Japan_1_PycoQC.html
 ```
 Open the html file in firefox. What can you see from the output? How do you think the read lengths compare to Illumina? How does read quality vary over time?
 
@@ -26,7 +26,7 @@ We should also check to see if the sequence contains any contaminants. We have u
 mkdir kraken
 rcf -n ./taxdump/ -k Ecoli_Japan_1.koutput.txt -o kraken/Ecoli_Japan_1_kraken.html
 ```
-What can you determine from the Kraken2 outputs? Is the data clean? There are a few other genera included in the output- do you think they are contaminants (or not)?
+What can you determine from the Kraken2 outputs? Is the data clean? There are a few other genera included in the output — do you think they might be contaminants?
 
 Just in case we will filter our fastq files to remove any contaminants. We won't be too stringent with the filtering- we will use the taxa id from NCBI for Enterobacteriaceae (543). To do this we will use **KrakenTools**:
 
@@ -57,17 +57,17 @@ Inside the assembly_annotation directory you will see "Ecoli_Japan_1.gff". This 
 
 ### Step 5. Predicting Drug-resistance
 **Step 5**: Great! We have an assembly and we have annotated it. How are the assemblies useful for downstream analysis? For bacteria specifically, genome assemblies can be input into specialist software to mass screen the contigs (bits of the assembly) for antimicrobial resistance genes, virulence genes or plasmids. **Abricate** is a handy suite of tools that can help us do this by scanning databases of these genes.
-Some resistance genes:
+To identify resistance genes:
 ```
 mkdir abricate_results
 abricate --db resfinder --quiet flye_output/assembly.fasta > abricate_results/resistance_results.txt
 ```
-Some virulence genes:
+To identify virulence genes:
 ```
 abricate --db vfdb --quiet flye_output/assembly.fasta > abricate_results/virulence_results.txt
 
 ```
-Some plasmids:
+To identify plasmids:
 ```
 abricate --db plasmidfinder --quiet flye_output/assembly.fasta > abricate_results/plasmid_results.txt
 ```
@@ -97,7 +97,7 @@ conda activate nanopore
 cd ~/nanopore/data
 minimap2 -ax map-ont Ecoli_reference.fasta Ecoli_Japan_1_trim.fastq.gz  | samtools sort -o Ecoli_Japan_1_aln.bam
 ```
-For variant calling we tend to use variant callers that have been designed specifically for Nanopore data. This includes **Clair3** and **Freebayes**, which can generate outputs that are seemingly compatible with GATK software. These tools can be fairly slow so feel free to trial them in your own time!
+For variant calling we tend to use variant callers that have been designed specifically for Nanopore data. This includes **Clair3** and **Freebayes**, which can generate outputs that are generally compatible with GATK-based workflows. These tools can be fairly slow so feel free to trial them in your own time!
 
 ### Can you do this analysis with Illumina data?
 **Yes!** Anything from steps 3 to 6 can be done with Illumina data. You might just need to switch up your tool box. For bacteria genome assembly with short read data, there are some fantastic tools available such as **shovill**. The short read assemblies can be annotated using **prokka** and analysed using **abricate** as above. Here, we wanted to demonstrate the utility of nanopore data for real-time sequencing and help you gain some experience in the downstream analysis.
