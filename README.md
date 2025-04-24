@@ -35,7 +35,7 @@ python ./taxdump/extract_kraken_reads.py --include-children --fastq-output -t 54
 ```
 
 ### Step 2. Assembly
-**Step 2**: Let's first now perform genome assembly using our high-quality, trimmed and filtered nanopore fastq. There are a few different tools we can use, but for Nanopore data **Flye** performs well. This may take 5 minutes or so to run. 
+**Step 2**: Let's now perform genome assembly using our high-quality, trimmed and filtered nanopore fastq. There are a few different tools we can use, but for Nanopore data **Flye** performs well. This may take 5 minutes or so to run. 
 
 ```
 flye --nano-raw "./kraken/Ecoli_Japan_1.kraken_filtered.fq" --read-error 0.03 --genome-size 4.6m --out-dir flye_output --threads 16 
