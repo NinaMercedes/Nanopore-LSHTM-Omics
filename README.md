@@ -2,7 +2,7 @@
 Nanopore LSHTM 'Omics Course
 
 ## Identifying drug-resistance from *Escherichia coli* WGS sequenced using Oxford Nanopore reads
-In the data repository you have been provided with seven *Escherichia coli* whole genome sequences that have been sequenced using Oxford Nanopore (MinION). These samples were collected from a long-term health care facility in Japan by a previous study (ENA Project Accession: PRJDB9189). These sequences have already been basecalled, trimmed and we have provided some QC reports. Your task is to analyse the Nanopore fastq data to identify drug-resistance genes. 
+In the data repository you have been provided with seven *Escherichia coli* whole genome sequences that have been sequenced using Oxford Nanopore (MinION). These samples were collected from a long-term health care facility in Japan by a previous study (ENA Project Accession: PRJDB9189). These sequences have already been basecalled and we have provided some QC reports. Your task is to analyse the Nanopore fastq data to identify drug-resistance genes. 
 
 As we have done previously, the first step will be to perform QC before going onto downstream analysis. To trim the nanopore reads we have used **Porechop** (*ab initio*) to identify any adapter sequences and remove them. This is an important step, especially when performing genome assembly. 
 
@@ -10,10 +10,16 @@ As we have done previously, the first step will be to perform QC before going on
 **Step 1**: Let's first check the quality of the nanopore fastq data by mapping to an E.coli reference genome. To do this we use a 'sequencing_summary.txt' file generated using dorado. We check quality using **PycoQC**:
 ```
 conda activate nanopore
+cd nanopore/data
 mkdir pycoqc
 pycoQC –f sequencing_summary.txt –o pycoqc/Ecoli_Japan_1_PycoQC.html
 ```
-Open the html file. What can you see from the output? How do you think the read lengths compare to Illumina? How does read quality vary over time?
+Open the html file in firefox. What can you see from the output? How do you think the read lengths compare to Illumina? How does read quality vary over time?
+
+Next we should trim our files and filter for high-quality reads. 
+```
+gunzip -c "Ecoli_Japan_1.fastq.gz" | chopper -q 10 -l 500 --headcrop 50 --tailcrop 50 | gzip > "Ecoli_Japan_1_trim.fastq.gz"
+```
 
 We should also check to see if the sequence contains any contaminants. We have used **Kraken2** to do this. The Kraken reports have been generated for you as they require large databases. We can visualise the results using **recentrifuge (rcf)**:
 ```
@@ -88,13 +94,13 @@ What do you think the blue blocks mean?
 The mapping and variant calling tools for Nanopore are different than those typically used with Illumina data. Nanopore fastq data by mapping to an E.coli reference genome using **Minimap2**. Notice the '-ax map-ont' signalling we are using Nanopore data. Minimap2 creates a SAM file, a type of alignment file. We need to convert this to a BAM file to make the alignment compatible with other software. We do this using **samtools**.
 ```
 conda activate nanopore
-cd nanopore/bacteria/data
+cd ~/nanopore/data
 minimap2 -ax map-ont Ecoli_reference.fasta Ecoli_Japan_1_trim.fastq.gz  | samtools sort -o Ecoli_Japan_1_aln.bam
 ```
 For variant calling we tend to use variant callers that have been designed specifically for Nanopore data. This includes **Clair3** and **Freebayes**, which can generate outputs that are seemingly compatible with GATK software. These tools can be fairly slow so feel free to trial them in your own time!
 
 ### Advanced
-1. Now that you have identified the drug-resistance genes for one sample, how about performing the steps 2-5 on the remaining samples e.g. Ecoli_Japan_2_trim.fastq.gz, what are your results?
+1. Now that you have identified the drug-resistance genes for one sample, how about performing the steps on the remaining samples e.g. Ecoli_Japan_2_trim.fastq.gz, what are your results? Please note you will not have to perform PycoQC on the remaining samples.
 2. You can see in step 2 used a read error of **0.03**, if you have time you could change this to **0.05**. How does this affect your BUSCO and QUAST results?
 
 ### Tips and Tricks
