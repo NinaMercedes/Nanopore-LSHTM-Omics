@@ -1,7 +1,7 @@
 # Nanopore-LSHTM-Omics
 Nanopore LSHTM 'Omics Course
 
-## Identifying drug-resistance from *Escherichia coli* WGS sequenced using Oxford Nanopore reads
+## Identifying drug-resistance from *Escherichia coli* WGS sequenced using Oxford Nanopore
 In the data repository you have been provided with seven *Escherichia coli* whole genome sequences that have been sequenced using Oxford Nanopore (MinION). These samples were collected from a long-term health care facility in Japan by a previous study (ENA Project Accession: PRJDB9189). These sequences have already been basecalled and we have provided some QC reports. Your task is to analyse the Nanopore fastq data to identify drug-resistance genes. 
 
 As we have done previously, the first step will be to perform QC before going onto downstream analysis. 
