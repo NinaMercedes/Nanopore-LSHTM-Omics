@@ -4,7 +4,7 @@ Nanopore LSHTM 'Omics Course
 ## Identifying drug-resistance from *Escherichia coli* WGS sequenced using Oxford Nanopore reads
 In the data repository you have been provided with seven *Escherichia coli* whole genome sequences that have been sequenced using Oxford Nanopore (MinION). These samples were collected from a long-term health care facility in Japan by a previous study (ENA Project Accession: PRJDB9189). These sequences have already been basecalled and we have provided some QC reports. Your task is to analyse the Nanopore fastq data to identify drug-resistance genes. 
 
-As we have done previously, the first step will be to perform QC before going onto downstream analysis. To trim the nanopore reads we have used **Porechop** (*ab initio*) to identify any adapter sequences and remove them. This is an important step, especially when performing genome assembly. 
+As we have done previously, the first step will be to perform QC before going onto downstream analysis. 
 
 ### Step 1. Quality Control and Contamination
 **Step 1**: Let's first check the quality of the nanopore fastq data by mapping to an E.coli reference genome. To do this we use a 'sequencing_summary.txt' file generated using dorado. We check quality using **PycoQC**:
@@ -16,7 +16,7 @@ pycoQC –f sequencing_summary.txt –o pycoqc/Ecoli_Japan_1_PycoQC.html
 ```
 Open the html file in firefox. What can you see from the output? How do you think the read lengths compare to Illumina? How does read quality vary over time?
 
-Next we should trim our files and filter for high-quality reads. 
+Next we should trim our files and filter for high-quality reads. To trim the nanopore reads we have used **Chopper** (You could also used Porechop_abi, see Tips and Tricks) to identify any adapter sequences and remove them. This is an important step, especially when performing genome assembly. 
 ```
 gunzip -c "Ecoli_Japan_1.fastq.gz" | chopper -q 10 -l 500 --headcrop 50 --tailcrop 50 | gzip > "Ecoli_Japan_1_trim.fastq.gz"
 ```
@@ -99,12 +99,14 @@ minimap2 -ax map-ont Ecoli_reference.fasta Ecoli_Japan_1_trim.fastq.gz  | samtoo
 ```
 For variant calling we tend to use variant callers that have been designed specifically for Nanopore data. This includes **Clair3** and **Freebayes**, which can generate outputs that are seemingly compatible with GATK software. These tools can be fairly slow so feel free to trial them in your own time!
 
+### Can you do this analysis with Illumina data?
+**Yes!** Anything from steps 3 to 6 can be done with Illumina data. You might just need to switch up your tool box. For bacteria genome assembly with short read data, there are some fantastic tools available such as **shovill**. The short read assemblies can be annotated using **prokka** and analysed using **abricate** as above. Here, we wanted to demonstrate the utility of nanopore data for real-time sequencing and help you gain some experience in the downstream analysis.
+
 ### Advanced
 1. Now that you have identified the drug-resistance genes for one sample, how about performing the steps on the remaining samples e.g. Ecoli_Japan_2_trim.fastq.gz, what are your results? Please note you will not have to perform PycoQC on the remaining samples.
 2. You can see in step 2 used a read error of **0.03**, if you have time you could change this to **0.05**. How does this affect your BUSCO and QUAST results?
 
 ### Tips and Tricks
-
 You may wish in the future to trim your own reads and make Kraken2 reports by yourself. These are the commands we have used to generate the data for the practical. These commands take some time or require large databases which is why we have performed these steps in advance.
 
 ```
