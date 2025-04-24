@@ -111,7 +111,7 @@ You may wish in the future to trim your own reads and make Kraken2 reports by yo
 
 ```
 # Kraken2 
-kraken2_client --host-ip XX.XX.XX.XX --sequence "Ecoli_Japan_1_trim.fastq.gz" --report "Ecoli_Japan_1.kreport.txt" > "Ecoli_Japan_1.koutput.txt"
+kraken2_client --host-ip XX.XX.XX.XX --sequence "Ecoli_Japan_1.fastq.gz" --report "Ecoli_Japan_1.kreport.txt" > "Ecoli_Japan_1.koutput.txt"
 # Trimming
 porechop_abi -abi -i "Ecoli_Japan_1.fastq.gz" -o "Ecoli_Japan_1_trim.fastq.gz"
 
