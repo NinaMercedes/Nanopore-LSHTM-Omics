@@ -44,7 +44,7 @@ flye --nano-raw "./kraken/Ecoli_Japan_1.kraken_filtered.fq" --read-error 0.03 --
 ### Step 3. Assess the Quality of your Assembly
 **Step 3**: Now the assembly is ready we will test its quality using **BUSCO**. BUSCO assesses the quality of genome assemblies by looking at the percentage of conserved genes. 
 ```
-busco -i flye_output/assembly.fasta -l enterobacteriaceae_odb12 -c 16 -m genome -o assembly_QC
+busco -i flye_output/assembly.fasta -l enterobacteriaceae_odb12 -c 4 -m genome -o assembly_QC
 ```
 !!! question  What do you think, is it a good assembly?
 
@@ -80,7 +80,7 @@ abricate --db plasmidfinder --quiet flye_output/assembly.fasta > abricate_result
 conda deactivate
 conda activate roary
 cd all_gffs
-roary -e --mafft -p 8 *.gff
+roary -e --mafft -p 4 *.gff
 conda deactivate
 ```
 Open firefox and load https://jameshadfield.github.io/phandango/#/ to view the roary output files. Drag and drop the "assembly_annotations/accessory_binary_genes.fa.newick" and "assembly_annotations/gene_presence_absence.csv" files into phandango. You should get something that looks like this:
