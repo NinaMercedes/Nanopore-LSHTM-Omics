@@ -21,9 +21,10 @@ Next we should trim our files and filter for high-quality reads. To trim the nan
 gunzip -c "Ecoli_Japan_1.fastq.gz" | chopper -q 10 -l 500 --headcrop 50 --tailcrop 50 | gzip > "Ecoli_Japan_1_trim.fastq.gz"
 ```
 
-We should also check to see if the sequence contains any contaminants. We have used **Kraken2** to do this. The Kraken reports have been generated for you as they require large databases. We can visualise the results using **recentrifuge (rcf)**:
+We should also check to see if the sequence contains any contaminants. We have used **Kraken2** to do this. The Kraken reports have been generated for you as they require large databases. We can visualise the results using **recentrifuge (rcf)**, here there is a dependency clash in our conda environment, so let's quickly install using **pip**:
 ```
 mkdir kraken
+pip install recentrifuge
 rcf -n ./taxdump/ -k Ecoli_Japan_1.koutput.txt -o kraken/Ecoli_Japan_1_kraken.html
 ```
 !!! question  What can you determine from the Kraken2 outputs? Is the data clean?  There are a few other genera included in the output — do you think they might be contaminants?
