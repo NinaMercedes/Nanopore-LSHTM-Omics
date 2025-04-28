@@ -120,5 +120,6 @@ You may wish in the future to trim your own reads and make Kraken2 reports by yo
 kraken2_client --host-ip XX.XX.XX.XX --sequence "Ecoli_Japan_1.fastq.gz" --report "Ecoli_Japan_1.kreport.txt" > "Ecoli_Japan_1.koutput.txt"
 # Trimming
 porechop_abi -abi -i "Ecoli_Japan_1.fastq.gz" -o "Ecoli_Japan_1_trim.fastq.gz"
-
+# Flye
+flye --nano-raw "./kraken/Ecoli_Japan_1.kraken_filtered.fq" --genome-size 4.6m --out-dir flye_output --threads 4
 ```
