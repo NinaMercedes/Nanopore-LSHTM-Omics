@@ -1,6 +1,8 @@
 # Third Generation Sequencing
 
 ## Activity Briefing: Identifying drug-resistance from *Escherichia coli* WGS sequenced using Oxford Nanopore
+**Create new codespace nanopore!**
+
 In the data repository you have been provided with seven *Escherichia coli* whole genome sequences that have been sequenced using Oxford Nanopore (MinION). These samples were collected from a long-term health care facility in Japan by a previous study (ENA Project Accession: PRJDB9189). These sequences have already been basecalled and we have provided some QC reports. Your task is to analyse the Nanopore fastq data to identify drug-resistance genes. 
 
 As we have done previously, the first step will be to perform QC before going onto downstream analysis. 
@@ -84,7 +86,8 @@ abricate --db plasmidfinder --quiet flye_output/assembly.fasta > abricate_result
 
 
 ### Step 7. Pan-genome Analysis
-**Please activate a new codespace pangenome!**
+**Please activate a new codespace pangenomes!**
+
 **Step 7**: With growth in the size of datasets, there is a need to understand key processes such as selection and evolution taking place in bacteria populations. For example, bacteria can transfer genes to one another, otherwise known as 'horizontal gene transfer' which can spread virulence and resistance genes. One way to identify some of these differences is to look *core* or *accessory* genes within a population: A Pangenome. **Roary** and **Pirate** can be used to compare our gff annotation files to one another and construct a pangenome. Roary constructs bacterial pangenomes by clustering genes extracted from annotated genomes provided in GFF3 format. It uses these annotations to identify core and accessory genes, helping researchers analyze genetic diversity, evolution, and functional differences across strains. Accurate GFF files are critical for reliable gene comparison and clustering. We will use a different conda environment and codespace. This may take a moment or two!
 ```
 conda activate roary
