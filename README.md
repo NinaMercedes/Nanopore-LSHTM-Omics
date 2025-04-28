@@ -96,7 +96,8 @@ Now the assembly is ready we will test its quality using **BUSCO**. BUSCO assess
 !!! question  What do you think, is it a good assembly?
 
 ### Step 6. Annotate your assembly
-Ok so the assembly could be better, but how about we annotate some genes? We will do this using **Prokka**. This is a specialist software specific to bacteria. There are lots of other tools for annotating Eukaryotes and beyond, however, this tool is well-developed for bacteria species.
+Ok, so the assembly could be better, but how about we annotate some genes? Genome annotation identifies genes and other important elements within a DNA sequence. It predicts where genes are located and what they might do. This helps scientists understand the biological function of the genome. Annotation is crucial for studying how organisms work and evolve. We will do this using **Prokka**. Prokka is a software tool used for rapid genome annotation of prokaryotic (bacterial and archaeal) genomes. It identifies genes, predicts their functions, and produces standard annotation files. Prokka streamlines the process by using multiple databases and tools in one easy step. It is widely used because it is fast, automated, and produces consistent results. There are lots of other tools for annotating Eukaryotes and beyond, however, this tool is well-developed for bacteria species.
+
 ```
 prokka --outdir assembly_annotation --prefix Ecoli_Japan_1 flye_output/assembly.fasta
 ```
