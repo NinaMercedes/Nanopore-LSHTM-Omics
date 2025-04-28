@@ -82,8 +82,6 @@ abricate --db plasmidfinder --quiet flye_output/assembly.fasta > abricate_result
 ```
 !!! question  Take a look at some of the resistance genes and plasmids- why might the blaCTX-M-27 gene be of concern?
 
-### Advanced
-1. Now that you have identified the drug-resistance genes for one sample, how about performing the steps on the remaining samples e.g. Ecoli_Japan_2.fastq.gz, what are your results? Please note you will not have to perform PycoQC/ trimming/ Kraken filtering on the remaining samples.
 
 ### Step 7. Pan-genome Analysis
 **Please activate a new codespace pangenome!**
