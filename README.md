@@ -51,10 +51,7 @@ flye --nano-raw "./kraken/Ecoli_Japan_1.kraken_filtered.fq" --genome-size 4.6m -
 ```
 
 ### Step 4. Assess the Quality of your Assembly
-**Step 4**: Now the assembly is ready we will test its quality using **BUSCO**. BUSCO assesses the quality of genome assemblies by looking at the percentage of conserved genes. 
-```
-busco -i flye_output/assembly.fasta -l enterobacteriaceae_odb12 -c 4 -m genome -o assembly_QC
-```
+**Step 4**: Now the assembly is ready we will test its quality using **BUSCO**. BUSCO assesses the quality of genome assemblies by looking at the percentage of conserved genes. Open the short_summary.specific.enterobacteriaceae_odb12.assembly_QC.txt file.
 !!! question  What do you think, is it a good assembly?
 
 ### Step 5. Annotate your assembly
@@ -114,4 +111,6 @@ kraken2_client --host-ip XX.XX.XX.XX --sequence "Ecoli_Japan_1.fastq.gz" --repor
 porechop_abi -abi -i "Ecoli_Japan_1.fastq.gz" -o "Ecoli_Japan_1_trim.fastq.gz"
 # Flye
 flye --nano-raw "./kraken/Ecoli_Japan_1.kraken_filtered.fq" --genome-size 4.6m --out-dir flye_output --threads 4
+# BUSCO
+busco -i flye_output/assembly.fasta -l enterobacteriaceae_odb12 -c 4 -m genome -o assembly_QC
 ```
