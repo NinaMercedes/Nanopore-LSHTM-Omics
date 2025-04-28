@@ -47,7 +47,8 @@ For variant calling we tend to use variant callers that have been designed speci
 **Step 3**: Let's now perform genome assembly using our high-quality, trimmed and filtered nanopore fastq. There are a few different tools we can use, but for Nanopore data **Flye** performs well. This may take 5 minutes or so to run. 
 
 ```
-flye --nano-raw "./kraken/Ecoli_Japan_1.kraken_filtered.fq" --genome-size 4.6m --out-dir flye_output --threads 4
+mkdir flye_output
+python ./taxdump/run_fly.py
 ```
 
 ### Step 4. Assess the Quality of your Assembly
