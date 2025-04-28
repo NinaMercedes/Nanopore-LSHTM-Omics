@@ -47,8 +47,9 @@ Let's first check the quality of the nanopore fastq data. To do this we use a 's
 ```
 mkdir pycoqc
 pycoQC -f sequencing_summary.txt -o pycoqc/Ecoli_Japan_1_PycoQC.html
+firefox pycoqc/Ecoli_Japan_1_PycoQC.html
 ```
-View your files on the left-hand side and right click PycoQC.html and download to your Dowload files. Open the html file in your web browser.
+Open the files using firefox or view your files on the left-hand side and right click PycoQC.html and download to your Dowload files and open the html file in your web browser.
 
 
 !!! question  What can you see from the output? How do you think the read lengths compare to Illumina? How does read quality vary over time?
@@ -63,8 +64,9 @@ We should also check to see if the sequence contains any contaminants. We have u
 mkdir kraken
 pip install recentrifuge
 rcf -n ./taxdump/ -k Ecoli_Japan_1.koutput.txt -o kraken/Ecoli_Japan_1_kraken.html
+firefox kraken/Ecoli_Japan_1_kraken.html
 ```
-View your files on the left-hand side and right click Ecoli_Japan_1_kraken.html and download to your Dowload files. Open the html file in your web browser.
+Open the files using firefox or view your files on the left-hand side and right click Ecoli_Japan_1_kraken.html and download to your Dowload files and open the html file in your web browser.
 
 !!! question  What can you determine from the Kraken2 outputs? Is the data clean?  There are a few other genera included in the output — do you think they might be contaminants?
 
@@ -132,7 +134,7 @@ cd pangenomics/all_gffs
 cpanm -f Bio::Roary 
 roary -e --mafft -p 2 *.gff
 ```
-As before, view your files, right click and download  "accessory_binary_genes.fa.newick" and "gene_presence_absence.csv". Open your favourite web browser and load https://jameshadfield.github.io/phandango/#/ to view the roary output files. Drag and drop the "accessory_binary_genes.fa.newick" and "gene_presence_absence.csv" files into phandango. You should get something that looks like this:
+View your files, right click and download  "accessory_binary_genes.fa.newick" and "gene_presence_absence.csv". Open your favourite web browser and load https://jameshadfield.github.io/phandango/#/ to view the roary output files. Drag and drop the "accessory_binary_genes.fa.newick" and "gene_presence_absence.csv" files into phandango. You should get something that looks like this:
 ![image](https://github.com/user-attachments/assets/11f76e30-3125-43ae-9614-59e5cb984cb5)
 
 !!! question  What do you think the blue blocks mean?
