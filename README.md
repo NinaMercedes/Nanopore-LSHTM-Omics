@@ -20,10 +20,10 @@ We have the pod5 files already in the data directory that are output directly fr
 * The pod5 files
 * The barcoding kit. Important to get right due to the signal interpretation from the model, and the specific barcoding sequences given to each model.
 * The basecalling model. The machine learning model to decode the nanopore sequencing data. You can learn more about the models here https://dorado-docs.readthedocs.io/en/latest/models/models/. But they essentially come in 3 different versions and correspond to the kits and chemistries used:
-** fast (the fastest and least accurate)
-** hac (high accuracy)
-** sup (super-accurate, the most accurate)
-** The sample sheet. Information about the samples you're running, must be in the correct format which you can see here https://dorado-docs.readthedocs.io/en/latest/barcoding/sample_sheet/
+  * fast (the fastest and least accurate)
+  * hac (high accuracy)
+  * sup (super-accurate, the most accurate)
+  * The sample sheet. Information about the samples you're running, must be in the correct format which you can see here https://dorado-docs.readthedocs.io/en/latest/barcoding/sample_sheet/
 
 You will find all of these things in the data directory.
 
