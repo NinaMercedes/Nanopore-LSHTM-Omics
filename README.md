@@ -84,7 +84,7 @@ minimap2 -ax map-ont Ecoli_reference.fasta ./kraken/Ecoli_Japan_1.kraken_filtere
 For variant calling we tend to use variant callers that have been designed specifically for Nanopore data. This includes **Clair3** and **Freebayes**, which can generate outputs that are generally compatible with GATK-based workflows. These tools can be fairly slow so feel free to trial them in your own time!
 
 ### Step 4. Assembly
-Let's now perform genome assembly using our high-quality, trimmed and filtered nanopore fastq. There are a few different tools we can use, but for Nanopore data **Flye** performs well. This may take 2 minutes or so to run. 
+While mapping aligns reads to a known reference, assembly builds the genome from scratch. Assembly is essential when no good reference exists or when studying structural variation and novel regions. We often assemble bacterial genomes because they are small, circular, and can be fully reconstructed. Assembly allows us to detect plasmids, structural variants, and novel genes that mapping alone might miss. Let's now perform genome assembly using our high-quality, trimmed and filtered nanopore fastq. There are a few different tools we can use, but for Nanopore data **Flye** performs well. This may take 2 minutes or so to run. 
 
 ```
 mkdir flye_output
