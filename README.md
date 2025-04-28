@@ -92,6 +92,7 @@ abricate --db plasmidfinder --quiet flye_output/assembly.fasta > abricate_result
 ```
 conda activate roary
 cd pangenomics/all_gffs
+cpanm -f Bio::Roary 
 roary -e --mafft -p 2 *.gff
 ```
 Open firefox and load https://jameshadfield.github.io/phandango/#/ to view the roary output files. Drag and drop the "assembly_annotations/accessory_binary_genes.fa.newick" and "assembly_annotations/gene_presence_absence.csv" files into phandango. You should get something that looks like this:
