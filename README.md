@@ -23,7 +23,7 @@ We have the pod5 files already in the data directory that are output directly fr
   * fast (the fastest and least accurate)
   * hac (high accuracy)
   * sup (super-accurate, the most accurate)
-  * The sample sheet. Information about the samples you're running, must be in the correct format which you can see here https://dorado-docs.readthedocs.io/en/latest/barcoding/sample_sheet/
+* The sample sheet. Information about the samples you're running, must be in the correct format which you can see here https://dorado-docs.readthedocs.io/en/latest/barcoding/sample_sheet/
 
 You will find all of these things in the data directory.
 
