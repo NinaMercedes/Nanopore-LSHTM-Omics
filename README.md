@@ -37,9 +37,9 @@ python ./taxdump/extract_kraken_reads.py --include-children --fastq-output -t 54
 ```
 
 ### Step 2. Mapping and Variant Calling
-The mapping and variant calling tools for Nanopore are different than those typically used with Illumina data. Now that we have verified a successful sequencing run, our data are ready to go, we will now map the reads on to a reference genome and perform variant calling. Nanopore fastq data can be mapped to an E.coli reference genome using **Minimap2**. Notice the '-ax map-ont' signalling we are using Nanopore data. Minimap2 creates a SAM file, a type of alignment file. We need to convert this to a BAM file to make the alignment compatible with other software. We do this using **samtools**.
+The mapping and variant calling tools for Nanopore are different than those typically used with Illumina data. Now that we have verified a successful sequencing run, our data are ready to go, we will now map the reads on to a reference genome and perform variant calling. Nanopore fastq data can be mapped to an E.coli reference genome using **Minimap2**. Notice the '-ax map-ont' signalling we are using Nanopore data. Minimap2 creates a SAM file, a type of alignment file. We need to convert this to a BAM file to make the alignment compatible with other software (see tips and tricks). We do this using **samtools**, but you are not required to do this as a part of this practical.
 ```
-minimap2 -ax map-ont Ecoli_reference.fasta ./kraken/Ecoli_Japan_1.kraken_filtered.fq | samtools sort -o Ecoli_Japan_1_aln.bam
+minimap2 -ax map-ont Ecoli_reference.fasta ./kraken/Ecoli_Japan_1.kraken_filtered.fq > Ecoli_Japan_1_aln.sam
 ```
 For variant calling we tend to use variant callers that have been designed specifically for Nanopore data. This includes **Clair3** and **Freebayes**, which can generate outputs that are generally compatible with GATK-based workflows. These tools can be fairly slow so feel free to trial them in your own time!
 
@@ -116,4 +116,6 @@ porechop_abi -abi -i "Ecoli_Japan_1.fastq.gz" -o "Ecoli_Japan_1_trim.fastq.gz"
 flye --nano-raw "./kraken/Ecoli_Japan_1.kraken_filtered.fq" --genome-size 4.6m --out-dir flye_output --threads 4
 # BUSCO
 busco -i flye_output/assembly.fasta -l enterobacteriaceae_odb12 -c 4 -m genome -o assembly_QC
+# Converting sam to bam
+samtools sort -o Ecoli_Japan_1_aln.bam Ecoli_Japan_1_aln.sam
 ```
