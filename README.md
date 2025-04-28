@@ -53,6 +53,8 @@ python ./taxdump/run_fly.py
 
 ### Step 4. Assess the Quality of your Assembly
 **Step 4**: Now the assembly is ready we will test its quality using **BUSCO**. BUSCO assesses the quality of genome assemblies by looking at the percentage of conserved genes. Open the short_summary.specific.enterobacteriaceae_odb12.assembly_QC.txt file.
+
+
 !!! question  What do you think, is it a good assembly?
 
 ### Step 5. Annotate your assembly
