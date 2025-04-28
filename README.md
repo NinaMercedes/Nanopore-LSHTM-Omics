@@ -55,7 +55,7 @@ For variant calling we tend to use variant callers that have been designed speci
 **Step 3**: Let's now perform genome assembly using our high-quality, trimmed and filtered nanopore fastq. There are a few different tools we can use, but for Nanopore data **Flye** performs well. This may take 5 minutes or so to run. 
 
 ```
-flye --nano-raw "./kraken/Ecoli_Japan_1.kraken_filtered.fq" --read-error 0.03 --genome-size 4.6m --out-dir flye_output --threads 16 
+flye --nano-raw "./kraken/Ecoli_Japan_1.kraken_filtered.fq" --genome-size 4.6m --out-dir flye_output --threads 16 
 ```
 
 ### Step 4. Assess the Quality of your Assembly
@@ -91,8 +91,7 @@ abricate --db plasmidfinder --quiet flye_output/assembly.fasta > abricate_result
 !!! question  Take a look at some of the resistance genes and plasmids- why might the blaCTX-M-27 gene be of concern?
 
 ### Advanced
-1. Now that you have identified the drug-resistance genes for one sample, how about performing the steps on the remaining samples e.g. Ecoli_Japan_2_trim.fastq.gz, what are your results? Please note you will not have to perform PycoQC on the remaining samples.
-2. You can see in step 2 used a read error of **0.03**, if you have time you could change this to **0.05**. How does this affect your BUSCO and QUAST results?
+1. Now that you have identified the drug-resistance genes for one sample, how about performing the steps on the remaining samples e.g. Ecoli_Japan_2_trim.fastq.gz, what are your results? Please note you will not have to perform PycoQC/ trimming/ Kraken filtering on the remaining samples.
 
 ### Step 7. Pan-genome Analysis
 **Please activate a new codespace pangenome**
