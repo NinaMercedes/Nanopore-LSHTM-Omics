@@ -51,11 +51,11 @@ minimap2 -ax map-ont Ecoli_reference.fasta ./kraken/Ecoli_Japan_1.kraken_filtere
 For variant calling we tend to use variant callers that have been designed specifically for Nanopore data. This includes **Clair3** and **Freebayes**, which can generate outputs that are generally compatible with GATK-based workflows. These tools can be fairly slow so feel free to trial them in your own time!
 
 ### Step 3. Assembly
-**Step 3**: Let's now perform genome assembly using our high-quality, trimmed and filtered nanopore fastq. There are a few different tools we can use, but for Nanopore data **Flye** performs well. This may take 5 minutes or so to run. 
+**Step 3**: Let's now perform genome assembly using our high-quality, trimmed and filtered nanopore fastq. There are a few different tools we can use, but for Nanopore data **Flye** performs well. This may take 2 minutes or so to run. 
 
 ```
 mkdir flye_output
-python ./taxdump/run_fly.py
+python ./taxdump/flye --nano-raw "./kraken/Ecoli_Japan_1.kraken_filtered.fq" --genome-size 4.6m --out-dir flye_output --threads 4
 ```
 
 ### Step 4. Assess the Quality of your Assembly
