@@ -4,16 +4,38 @@
 **Create new codespace nanopore!**
 
 In the data repository you have been provided with seven *Escherichia coli* whole genome sequences that have been sequenced using Oxford Nanopore (MinION). These samples were collected from a long-term health care facility in Japan by a previous study (ENA Project Accession: PRJDB9189). These sequences have already been basecalled and we have provided some QC reports. Your task is to analyse the Nanopore fastq data to identify drug-resistance genes. 
+### Step 1. Basecalling
 
-As we have done previously, the first step will be to perform QC before going onto downstream analysis. 
+We have the pod5 files already in the data directory that are output directly from the nanopore sequencer. Now its time to basecall the data to get the fastq files. To run dorado correctly, we need a few things:
 
-### Step 1. Quality Control and Contamination
-The output sequence data is not always ready to be put straight through a pipeline. We must first perform quality control, trimming and filtering for contamination. Nanopore library preparation results in the addition of a sequencing adapter at each end of the fragment. Both the template and complement strands to be sequenced carry the motor protein which means both strands are able to translocate the nanopore. For downstream analysis, it is important to remove these adapters. For this we will use chopper, although sometimes porechop can be used. These programs processes all of the reads in our basecalled fastq file, and removes these adapter sequences. Furthermore, the ligation library prep process can result in conjoined reads, meaning an adapter will be found in the middle of an extra-long read. Trimming tools will identify these, split them and remove the adapters. In addition, if you use a multiplexing kit to maximise sample throughput, this program will split the reads based on the molecular barcode added to each sample. Our dataset only has one sample, so this demultiplexing won't be necessary. Another method of quality control is to check our reads for sequence contamination from other 'off-target' organisms. This is important in order to understand how effective your DNA extraction, enrichment and sequencing was. And secondly, to prevent anomalous reads from being incorporated in to assemblies. Using our basecalled reads we will perform an analysis using Kraken. Kraken is a tool which sifts through each read in a .fastq file and crosschecks it against a database of microorganisms. The output is a taxonomic assignment of each read, enabling to identify if any contamination has occurred.
+* The pod5 files
+* The barcoding kit. Important to get right due to the signal interpretation from the model, and the specific barcoding sequences given to each model.
+* The basecalling model. The machine learning model to decode the nanopore sequencing data. You can learn more about the models here https://dorado-docs.readthedocs.io/en/latest/models/models/. But they essentially come in 3 different versions and correspond to the kits and chemistries used:
+** fast (the fastest and least accurate)
+** hac (high accuracy)
+** sup (super-accurate, the most accurate)
+** The sample sheet. Information about the samples you're running, must be in the correct format which you can see here https://dorado-docs.readthedocs.io/en/latest/barcoding/sample_sheet/
 
-**Step 1**: Let's first check the quality of the nanopore fastq data. To do this we use a 'sequencing_summary.txt' file generated using dorado. We check quality using **PycoQC**:
+You will find all of these things in the data directory.
+
+We will now basecall using **dorado**, take notice of the parameters we have used. ** Note you may wish to add --emit-fastq when running in the future.
 ```
 conda activate nanopore
 cd nanopore/data
+python ./taxdump/dorado --output-dir dorado_out  --min-qscore 7 --kit-name SQK-NBD114-24 --sample-sheet sample_sheet.csv --trim all
+```
+Ok, great we have basecalled! However, the file has a generic name, let's move it back to our data directory before we do the quality checks.
+
+```
+cp ./dorado_out/exp40.fastq.gz Ecoli_Japan_1.fastq.gz
+```
+
+
+### Step 2. Quality Control and Contamination
+The output sequence data is not always ready to be put straight through a pipeline. We must first perform quality control, trimming and filtering for contamination. Nanopore library preparation results in the addition of a sequencing adapter at each end of the fragment. Both the template and complement strands to be sequenced carry the motor protein which means both strands are able to translocate the nanopore. For downstream analysis, it is important to remove these adapters. For this we will use chopper, although sometimes porechop can be used. These programs processes all of the reads in our basecalled fastq file, and removes these adapter sequences. Furthermore, the ligation library prep process can result in conjoined reads, meaning an adapter will be found in the middle of an extra-long read. Trimming tools will identify these, split them and remove the adapters. In addition, if you use a multiplexing kit to maximise sample throughput, this program will split the reads based on the molecular barcode added to each sample. Our dataset only has one sample, so this demultiplexing won't be necessary. Another method of quality control is to check our reads for sequence contamination from other 'off-target' organisms. This is important in order to understand how effective your DNA extraction, enrichment and sequencing was. And secondly, to prevent anomalous reads from being incorporated in to assemblies. Using our basecalled reads we will perform an analysis using Kraken. Kraken is a tool which sifts through each read in a .fastq file and crosschecks it against a database of microorganisms. The output is a taxonomic assignment of each read, enabling to identify if any contamination has occurred.
+
+Let's first check the quality of the nanopore fastq data. To do this we use a 'sequencing_summary.txt' file generated using dorado. We check quality using **PycoQC**:
+```
 mkdir pycoqc
 pycoQC -f sequencing_summary.txt -o pycoqc/Ecoli_Japan_1_PycoQC.html
 ```
