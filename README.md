@@ -15,7 +15,7 @@ In the data repository you have been provided with  *Escherichia coli* whole gen
 
 ### Step 1. Basecalling
 
-We have the pod5 files already in the data directory that are output directly from the nanopore sequencer. Now its time to basecall the data to get the fastq files. To run dorado correctly, we need a few things:
+We have the pod5 files already in the data directory that are output directly from the nanopore sequencer. Now it is time to basecall the data to get the fastq files. To run dorado correctly, we need a few things:
 
 * The pod5 files
 * The barcoding kit. Important to get right due to the signal interpretation from the model, and the specific barcoding sequences given to each model.
